@@ -1,68 +1,41 @@
 package com.example.notesharingapp;
 
+import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import com.example.notesharingapp.Fragment.Home_fragement;
-import com.example.notesharingapp.Fragment.add_fragement;
-import com.example.notesharingapp.Fragment.course_fragement;
-import com.example.notesharingapp.Fragment.you_fragement;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.zip.Inflater;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
-    ActivityMainBinding binding;
-
+public class MainActivity extends AppCompatActivity{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        replaceFragement(new Home_fragement());
+        setContentView(R.layout.activity_main);
+        ArrayList<SlideModel> imageList = new ArrayList<>(); // Create image list
 
-        binding.nav.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.home:
-                    replaceFragement(new Home_fragement());
-                    break;
-
-                case R.id.book:
-                    replaceFragement(new course_fragement());
-                    break;
-
-                case R.id.add:
-                    replaceFragement(new add_fragement());
-                    break;
-
-                case R.id.profile:
-                    replaceFragement(new you_fragement());
-                    break;
-
-                default:
-                    break;
-            }
-            return true;
-
-        });
-    }
-
-   
-
-    private void replaceFragement(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.home_fragement,fragment);
-        fragmentTransaction.commit();
+        // Adding images to the list
+        imageList.add(new SlideModel(R.drawable.study1, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.study2, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.study3, ScaleTypes.FIT));
+        NavHostFragment navHostFragment = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        } else {
+            throw new IllegalStateException("NavHostFragment not found");
+        }
 
     }
-    
 }
+

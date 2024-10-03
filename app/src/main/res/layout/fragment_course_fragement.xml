@@ -3,12 +3,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.course_fragement">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@color/lightgrey"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawableEnd="@drawable/baseline_settings_24"
+            android:drawablePadding="10dp"
+            android:hint="Search"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColorHint="@color/black"
+            android:textSize="25sp"
+            app:itemIconSize="90dp"
+            tools:ignore="RtlHardcoded"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <TextView
+            android:id="@+id/faculty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/course"
+            android:text="@string/faculties"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search" />
+
+
+        <TextView
+            android:id="@+id/bhmtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/bhm_ndepartement"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/bhm"
+            app:layout_constraintStart_toStartOf="@+id/bhm"
+            app:layout_constraintTop_toBottomOf="@+id/bhm" />
+
+        <TextView
+            android:id="@+id/bittxt"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/bit_ndepartement"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/bit"
+            app:layout_constraintStart_toStartOf="@+id/bit"
+            app:layout_constraintTop_toBottomOf="@+id/bit" />
+
+        <TextView
+            android:id="@+id/bcatxt"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/bca_ndepartement"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/bca_image"
+            app:layout_constraintHorizontal_bias="0.695"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bca_image" />
+
+        <ImageView
+            android:id="@+id/bit"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="56dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bhm"
+            app:layout_constraintStart_toEndOf="@+id/bhm"
+            app:layout_constraintTop_toTopOf="@+id/bhm"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/bit" />
+
+        <ImageView
+            android:id="@+id/bca_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/bca"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/faculty" />
+
+        <ImageView
+            android:id="@+id/bhm"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="52dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bca_image"
+            app:layout_constraintStart_toEndOf="@+id/bca_image"
+            app:layout_constraintTop_toTopOf="@+id/bca_image"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/bhm"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/homefragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:defaultNavHost="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:navGraph="@navigation/navigation"
+            tools:ignore="MissingConstraints" />
+
+    </FrameLayout>
