@@ -1,15 +1,42 @@
 <resources>
     <string name="app_name">Note sharing app</string>
     <string name="search">Search</string>
-    <string name="Home"></string>
     <string name="home">Home</string>
     <string name="course">Course</string>
     <string name="add">add</string>
     <string name="you">You</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bca_ndepartement">tt\n</string>
+    <string name="bca_ndepartement">bca</string>
     <string name="bit_ndepartement">bit</string>
     <string name="bhm_ndepartement">bhm</string>
     <string name="faculties">faculties</string>
+    <string name="empowering_minds_anywhere_anytime">Empowering_Minds_Anywhere_Anytime</string>
+    <string name="bhm_description">Description of the BHM image</string>
+    <string name="bca_description">Description of the BCA image</string>
+    <string name="bit_description">Description of the BIT image</string>
+    <string name="enter_file_type">Enter File Type</string>
+    <string name="upload">Upload</string>
+    <string name="upload_your_note">Upload Your Note</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password">Forgot password??</string>
+    <string name="don_t_you_have_an_account_sign_up">Don\'t you have an Account? Sign Up!</string>
+    <string name="login">Login</string>
+    <string name="username">UserName</string>
+    <string name="already_have_account">Already have account!</string>
+    <string name="createAccount">createAccount\n</string>
+    <string name="toGetStarted">Get Strarted\n</string>
+    <string name="buttonLoginNow">Login\n</string>
+    <string name="Signup">SignUp\n</string>
+    <string name="Name">Name\n</string>
+    <string name="textAlreadyHaveAccount">textAlreadyHaveAccount</string>
+    <string name="textBoxConfirmPassword">ConfirmPassword\n</string>
+    <string name="Password">Password</string>
+    <string name="Phone">Phone</string>
+    <string name="Email">Email\n</string>
+    <string name="welcomeText">welcomeText\n</string>
+    <string name="gladText">gladText\n</string>
+    <string name="textBoxEmail">textBoxEmail</string>
+    <string name="LoginWith">LoginWith\n</string>
+    <string name="SignUpNow">SignUpNow\n</string>
 </resources>
