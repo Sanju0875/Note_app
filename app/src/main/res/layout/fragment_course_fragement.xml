@@ -21,6 +21,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/grey_bg"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawableEnd="@drawable/baseline_settings_24"
+            android:drawablePadding="10dp"
+            android:hint="Search"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <!-- RecyclerView for Uploaded Courses in Grid Format -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/courseRecyclerView"
