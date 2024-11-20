@@ -58,9 +58,13 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:21.0.1")
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-storage:21.0.1")
+    implementation ("com.intuit.ssp:ssp-android:1.1.1")
 
     implementation( "androidx.appcompat:appcompat:1.2.0")
     implementation ("com.google.android.material:material:1.3.0")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
+    implementation ("com.intuit.sdp:sdp-android:1.1.1")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 }

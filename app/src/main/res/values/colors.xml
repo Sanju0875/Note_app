@@ -9,16 +9,16 @@
     <color name="lightgrey">#D8D8D8</color>
     <color name="skyblue">#8cbed6 </color>
     <color name="darkblue">#00008B </color>
-    <color name="HeadingTextColor">#2E3B4E</color> <!-- Charcoal Navy -->
-    <color name="SubHeadingTextColor">#4F5B62</color> <!-- Cool Gray -->
-    <color name="ParagraphTextColor">#616161</color> <!-- Slate Gray -->
+    <color name="HeadingTextColor">#2E3B4E</color>
+    <color name="SubHeadingTextColor">#4F5B62</color>
+    <color name="ParagraphTextColor">#616161</color>
     <color name="SecondaryTextColor">#757575</color>
 
-    <color name="PrimaryColor">#FF6F61</color> <!-- Coral Red -->
-    <color name="AccentColor">#FFD54F</color> <!-- Sunshine Yellow -->
-    <color name="BackgroundColor">#F9F9F9</color> <!-- Almost White -->
-    <color name="CardBackgroundColor">#FFFFFF</color> <!-- White -->
-
+    <color name="PrimaryColor">#FF6F61</color>
+    <color name="AccentColor">#FFD54F</color>
+    <color name="BackgroundColor">#F9F9F9</color>
+    <color name="CardBackgroundColor">#FFFFFF</color>
+    <color name="purple"> #673AB7</color>
 
 
 </resources>

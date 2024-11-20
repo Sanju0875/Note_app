@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/course_fragement">
+    app:startDestination="@id/home_fragement">
 
     <fragment
         android:id="@+id/home_fragement"
@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_course_fragement" />
     <fragment
         android:id="@+id/add_fragement"
-        android:name="com.example.notesharingapp.Fragment.add_fragement"
+        android:name="com.example.notesharingapp.Fragment.AddFragment"
         android:label="fragment_add_fragement"
         tools:layout="@layout/fragment_add_fragement" />
     <fragment

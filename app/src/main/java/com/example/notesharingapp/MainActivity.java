@@ -1,20 +1,14 @@
 package com.example.notesharingapp;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.notesharingapp.Fragment.Home_fragement;
-import com.example.notesharingapp.Fragment.add_fragement;
-import com.example.notesharingapp.Fragment.course_fragement;
-import com.example.notesharingapp.Fragment.you_fragement;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,39 +17,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNav = findViewById(R.id.navigation);
+        // Initialize the NavHostFragment and NavController
+        NavHostFragment navHostFragment = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
 
-        NavigationBarView.OnItemSelectedListener navListener = item -> {
-            int itemId = item.getItemId();
-            Fragment selectedFragment = null;
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
-            if (itemId == R.id.nav_home) {
-                selectedFragment = new Home_fragement();
-            } else if (itemId == R.id.nav_course) {
-                selectedFragment = new course_fragement();
-            } else if (itemId == R.id.nav_add) {
-                selectedFragment = new add_fragement();
-            } else if (itemId == R.id.nav_you) {
-                selectedFragment = new you_fragement();
-            }
+            // Set up the BottomNavigationView with the NavController
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, selectedFragment).commit();
-            }
-            return true;
-        };
+            // Add listener to handle navigation item selection
+            bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+                int itemId = item.getItemId();
 
-        bottomNav.setOnItemSelectedListener(navListener);
-        bottomNav.setSelectedItemId(R.id.home_fragement);
+                // Use if-else instead of switch to avoid the constant expression error
+                if (itemId == R.id.nav_home) {
+                    navController.navigate(R.id.home_fragement);
+                } else if (itemId == R.id.nav_course) {
+                    navController.navigate(R.id.course_fragement);
+                } else if (itemId == R.id.nav_add) {
+                    navController.navigate(R.id.add_fragement);
+                } else if (itemId == R.id.nav_you) {
+                    navController.navigate(R.id.you_fragement);
+                }
 
-        Fragment selectedFragment = new Home_fragement();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, selectedFragment).commit();
-
-        ImageSlider imageSlider = findViewById(R.id.image_slider);
-        ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.study1, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.study2, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.study3, ScaleTypes.FIT));
-        imageSlider.setImageList(imageList, ScaleTypes.FIT);
-    }
+                return true;
+            });
+        } else {
+            // Handle the case where navHostFragment is null (e.g., log an error)
+            Toast.makeText(this, "Error: Navigation Host Fragment not found!", Toast.LENGTH_LONG).show();
+        }
+}
 }

@@ -5,7 +5,6 @@
     <string name="course">Course</string>
     <string name="add">add</string>
     <string name="you">You</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bca_ndepartement">bca</string>
     <string name="bit_ndepartement">bit</string>
@@ -24,7 +23,7 @@
     <string name="login">Login</string>
     <string name="username">UserName</string>
     <string name="already_have_account">Already have account!</string>
-    <string name="createAccount">createAccount\n</string>
+    <string name="CreateAccount">CreateAccount\n</string>
     <string name="toGetStarted">Get Strarted\n</string>
     <string name="buttonLoginNow">Login\n</string>
     <string name="Signup">SignUp\n</string>
