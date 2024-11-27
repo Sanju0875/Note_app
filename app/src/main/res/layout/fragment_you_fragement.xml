@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Profile Picture -->
+
     <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="120dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Add Profile Image Button -->
+
     <Button
         android:id="@+id/addProfileImageButton"
         android:layout_width="wrap_content"

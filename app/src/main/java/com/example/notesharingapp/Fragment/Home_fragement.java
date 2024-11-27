@@ -33,7 +33,6 @@ public class Home_fragement extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_fragement, container, false);
 
         // Initialize UI components
-        searchEditText = view.findViewById(R.id.search);
         imageSlider = view.findViewById(R.id.image_slider);
         facultyText = view.findViewById(R.id.faculty);
         bcaImage = view.findViewById(R.id.bca_image);

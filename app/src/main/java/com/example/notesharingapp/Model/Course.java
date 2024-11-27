@@ -1,29 +1,37 @@
 package com.example.notesharingapp.Model;
 
 public class Course {
-    private String title;
-    private String type; // File type
-    private String url;  // File download URL
+    private int noteImage; // Drawable resource ID
+    private String noteTitle;
+    private String subjectName;
+    private String semester;
+    private String faculty;
 
-    public Course() {
-        // Default constructor for Firebase
+    public Course(int noteImage, String noteTitle, String subjectName, String semester, String faculty) {
+        this.noteImage = noteImage;
+        this.noteTitle = noteTitle;
+        this.subjectName = subjectName;
+        this.semester = semester;
+        this.faculty = faculty;
     }
 
-    public Course(String title, String type, String url) {
-        this.title = title;
-        this.type = type;
-        this.url = url;
+    public int getNoteImage() {
+        return noteImage;
     }
 
-    public String getTitle() {
-        return title;
+    public String getNoteTitle() {
+        return noteTitle;
     }
 
-    public String getType() {
-        return type;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public String getUrl() {
-        return url;
+    public String getSemester() {
+        return semester;
+    }
+
+    public String getFaculty() {
+        return faculty;
     }
 }

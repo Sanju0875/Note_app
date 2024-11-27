@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home_fragement" />
     <fragment
         android:id="@+id/course_fragement"
-        android:name="com.example.notesharingapp.Fragment.course_fragement"
+        android:name="com.example.notesharingapp.Fragment.CourseFragment"
         android:label="fragment_course_fragement"
         tools:layout="@layout/fragment_course_fragement" />
     <fragment

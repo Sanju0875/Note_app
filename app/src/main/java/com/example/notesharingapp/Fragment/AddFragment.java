@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
@@ -34,10 +35,9 @@ public class AddFragment extends Fragment {
 
     private ImageView fileIconImageView;
     private TextView fileNameTextView;
-    private EditText fileTitleEditText, fileTypeEditText;
+    private EditText fileTitleEditText, facultyEditText, subjectEditText;
+    private AutoCompleteTextView semesterDropdown;
     private Button uploadButton;
-    private ProgressBar progressBar;
-
     private Uri fileUri;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
@@ -50,16 +50,27 @@ public class AddFragment extends Fragment {
         fileIconImageView = view.findViewById(R.id.fileIconImageView);
         fileNameTextView = view.findViewById(R.id.fileNameTextView);
         fileTitleEditText = view.findViewById(R.id.fileTitleEditText);
-        fileTypeEditText = view.findViewById(R.id.fileTypeEditText);
+        facultyEditText = view.findViewById(R.id.facultyEditText);
+        subjectEditText = view.findViewById(R.id.subjectEditText);
+        semesterDropdown = view.findViewById(R.id.semesterDropdown);
         uploadButton = view.findViewById(R.id.uploadButton);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("files");
 
+        setupSemesterDropdown();
+
         fileIconImageView.setOnClickListener(v -> openFileChooser());
         uploadButton.setOnClickListener(v -> uploadFile());
 
         return view;
+    }
+
+    private void setupSemesterDropdown() {
+        String[] semesters = {"First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"};
+        ArrayAdapter<String> semesterAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, semesters);
+        semesterDropdown.setAdapter(semesterAdapter);
+        semesterDropdown.setOnClickListener(v -> semesterDropdown.showDropDown());
     }
 
     private void openFileChooser() {
@@ -84,61 +95,53 @@ public class AddFragment extends Fragment {
 
     private void uploadFile() {
         String title = fileTitleEditText.getText().toString().trim();
-        String type = fileTypeEditText.getText().toString().trim();
+        String faculty = facultyEditText.getText().toString().trim();
+        String semester = semesterDropdown.getText().toString().trim();
+        String subject = subjectEditText.getText().toString().trim();
 
         if (fileUri == null) {
             Toast.makeText(getContext(), "Please select a file", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(type)) {
+        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(faculty) || TextUtils.isEmpty(semester) || TextUtils.isEmpty(subject)) {
             Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         uploadButton.setEnabled(false);
-        String fileName = System.currentTimeMillis() + "_" + title + "." + type;
+        String fileName = System.currentTimeMillis() + "_" + title;
 
         StorageReference fileRef = storageReference.child(fileName);
         fileRef.putFile(fileUri).addOnSuccessListener(taskSnapshot ->
                 fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                    saveFileDetailsToDatabase(title, type, uri.toString());
+                    saveFileDetailsToDatabase(title, faculty, semester, subject, uri.toString());
                     Toast.makeText(getContext(), "File uploaded successfully", Toast.LENGTH_SHORT).show();
                     resetFields();
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to get download URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    uploadButton.setEnabled(true);
-                })
-        ).addOnFailureListener(e -> {
-            Toast.makeText(getContext(), "File upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                })).addOnFailureListener(e -> {
+            Toast.makeText(getContext(), "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             uploadButton.setEnabled(true);
         });
     }
 
-    private void saveFileDetailsToDatabase(String title, String type, String downloadUrl) {
-        String fileId = databaseReference.push().getKey();
-        HashMap<String, String> fileDetails = new HashMap<>();
+    private void saveFileDetailsToDatabase(String title, String faculty, String semester, String subject, String fileUrl) {
+        HashMap<String, Object> fileDetails = new HashMap<>();
         fileDetails.put("title", title);
-        fileDetails.put("type", type);
-        fileDetails.put("url", downloadUrl);
+        fileDetails.put("faculty", faculty);
+        fileDetails.put("semester", semester);
+        fileDetails.put("subject", subject);
+        fileDetails.put("fileUrl", fileUrl);
 
-        if (fileId != null) {
-            databaseReference.child(fileId).setValue(fileDetails)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "File details saved to database", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Failed to save file details", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
+        databaseReference.push().setValue(fileDetails);
     }
 
-
     private void resetFields() {
+        fileUri = null;
         fileNameTextView.setText("No file selected");
         fileTitleEditText.setText("");
-        fileTypeEditText.setText("");
+        facultyEditText.setText("");
+        semesterDropdown.setText("");
+        subjectEditText.setText("");
         uploadButton.setEnabled(true);
     }
 }
